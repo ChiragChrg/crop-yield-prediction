@@ -39,23 +39,32 @@ Area_List = ['Albania', 'Algeria', 'Angola', 'Argentina', 'Armenia', 'Australia'
 
 Crops_List = ['Maize', 'Potatoes', 'Rice, paddy', 'Sorghum', 'Soybeans', 'Wheat', 'Cassava', 'Sweet potatoes', 'Plantains and others', 'Yams']
 
-Year_List = [1990, 1991, 1992, 1993, 1994, 1995, 1996, 1997, 1998, 1999, 2000, 2001, 2002, 2004, 2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013]
+# Year_List = [1990, 1991, 1992, 1993, 1994, 1995, 1996, 1997, 1998, 1999, 2000, 2001, 2002, 2004, 2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013]
+Year_List = list(range(1900, 2101))
 
-Rainfall_Rate_List = [51, 56, 59, 74, 83, 89, 92, 151, 207, 216, 241, 250, 282, 285, 346, 383, 416, 447, 494, 495, 534, 536, 537, 562, 565, 589, 591, 593, 600, 608, 618, 624, 626, 630, 636, 637, 641, 652, 656, 657, 661, 686, 691, 700, 703, 748, 758, 778, 788, 832, 847, 854, 867, 1010, 1020, 1032, 1083, 1110, 1113, 1118, 1162, 1180, 1181, 1187, 1212, 1220, 1274, 1292, 1300, 1342, 1410, 1414, 1440, 1485, 1500, 1513, 1522, 1537, 1604, 1622, 1651, 1668, 1712, 1732, 1738, 1761, 1784, 1976, 1996, 2041, 2051, 2274, 2280, 2331, 2387, 2666, 2702, 2875, 3142, 3240]
+# Rainfall_Rate_List = [51, 56, 59, 74, 83, 89, 92, 151, 207, 216, 241, 250, 282, 285, 346, 383, 416, 447, 494, 495, 534, 536, 537, 562, 565, 589, 591, 593, 600, 608, 618, 624, 626, 630, 636, 637, 641, 652, 656, 657, 661, 686, 691, 700, 703, 748, 758, 778, 788, 832, 847, 854, 867, 1010, 1020, 1032, 1083, 1110, 1113, 1118, 1162, 1180, 1181, 1187, 1212, 1220, 1274, 1292, 1300, 1342, 1410, 1414, 1440, 1485, 1500, 1513, 1522, 1537, 1604, 1622, 1651, 1668, 1712, 1732, 1738, 1761, 1784, 1976, 1996, 2041, 2051, 2274, 2280, 2331, 2387, 2666, 2702, 2875, 3142, 3240]
+Rainfall_Rate_List = list(range(0, 12000))
 
+Temp_List = list(range(0, 61))
 
 def format_rainfall(value):
     return f"{value} mm"
 
+def format_temp(value):
+    return f"{value} ℃"
+
 def main():   
     st.title('Crop Yield Prediction')
     
-    Area = st.selectbox('Select the Area', Area_List)
-    Crop = st.selectbox('Select the Crop', Crops_List)
-    Year = st.select_slider('Select the Year', Year_List)
-    Rainfall = st.select_slider('Select the Rainfall/year in mm', Rainfall_Rate_List, format_func=format_rainfall)
-    Pesticide = st.number_input('Enter the amount of Pesticides in Tonnes')
-    Temperature = st.number_input('Enter the Average Temperature in Celsius')
+    Area = st.selectbox('Select an Area', Area_List)
+    Crop = st.selectbox('Select a Crop', Crops_List)
+    # Year = st.select_slider('Select the Year', Year_List)
+    # Year = st.text_input('Enter the Year')
+    Year = st.selectbox("Select a year:", Year_List, index=Year_List.index(2024))
+    Rainfall = st.select_slider('Select the Rainfall/year in mm', Rainfall_Rate_List, value=990, format_func=format_rainfall)
+    Pesticide = st.number_input('Enter the amount of Pesticides in Tonnes',step=1)
+    # Temperature = st.number_input('Enter the Average Temperature in Celsius',step=1)
+    Temperature = st.select_slider("Select an Average Temperature", Temp_List, value=25, format_func=format_temp)
 
     diagnosis = ''
     
